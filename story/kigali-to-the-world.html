@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kigali to the World — an accessible StoryCast video story about Bugesera International Airport, with English captions and transcript.">
+  <title>Kigali to the World — StoryCast</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav__inner">
+        <a href="../index.html" class="nav__logo" aria-label="StoryCast — home">StoryCast</a>
+
+        <button
+          class="nav__toggle"
+          aria-expanded="false"
+          aria-controls="nav-links"
+          aria-label="Open navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav__links" id="nav-links" role="list">
+          <li><a href="../index.html" class="nav__link">Home</a></li>
+          <li><a href="../index.html#stories" class="nav__link">Stories</a></li>
+          <li><a href="../about.html" class="nav__link">About</a></li>
+        </ul>
+
+        <a href="#video-player" class="nav__cta">Watch Video</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <article class="story" aria-labelledby="story-title">
+
+      <section
+        class="hero hero--story"
+        aria-labelledby="story-title"
+        style="background-image: linear-gradient(90deg, rgba(28, 25, 23, 0.82) 0%, rgba(28, 25, 23, 0.55) 45%, rgba(28, 25, 23, 0.30) 100%), url('../assets/images/Hero_2.png'); background-size: cover; background-position: center;"
+      >
+        <div class="hero__inner">
+          <a href="../index.html#stories" class="hero__back">← All Stories</a>
+
+          <p class="hero__eyebrow">Video Story · 3 min 45 sec · Accessible Media</p>
+
+          <h1 class="hero__title" id="story-title">
+            Kigali to the World
+          </h1>
+
+          <p class="hero__subtitle">
+            A guided video story imagining Bugesera International Airport as
+            Rwanda’s next-generation gateway, showing passenger movement,
+            aircraft landing, and the future of aviation connectivity.
+          </p>
+
+          <div class="hero__actions">
+            <a href="#video-player" class="btn btn--primary">
+              <span aria-hidden="true">▶</span>
+              Watch Video
+            </a>
+            <a href="#transcript" class="btn btn--outline">
+              Read Transcript
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--cream" aria-label="Story details">
+        <div class="container">
+          <dl class="stats">
+            <div class="stats__item">
+              <dt class="stats__label">Duration</dt>
+              <dd class="stats__value">3:45</dd>
+            </div>
+            <div class="stats__item">
+              <dt class="stats__label">Format</dt>
+              <dd class="stats__value">Video</dd>
+            </div>
+            <div class="stats__item">
+              <dt class="stats__label">Captions</dt>
+              <dd class="stats__value">English</dd>
+            </div>
+            <div class="stats__item">
+              <dt class="stats__label">Transcript</dt>
+              <dd class="stats__value">Available</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Video story content">
+        <div class="container">
+          <div class="story-layout">
+            <div>
+              <section id="video-player" aria-labelledby="player-heading">
+                <h2 class="section-label" id="player-heading">Watch the Video</h2>
+
+                <div class="player">
+                  <p class="player__label">Kigali to the World</p>
+
+                  <p>
+                    The narration plays in sync with the video and its English
+                    captions. The original video soundtrack stays quieter in
+                    the background. Use the narration slider below to adjust
+                    its volume; the video volume control adjusts the background
+                    soundtrack. Use the captions or CC control to show captions.
+                    A full transcript is provided below.
+                  </p>
+
+                  <figure>
+                    <video
+                      id="story-video"
+                      controls
+                      preload="metadata"
+                      playsinline
+                      poster="../assets/images/Hero_2.png"
+                      aria-describedby="video-description"
+                      style="width: 100%; height: auto; display: block; border-radius: 8px; background: #1c1917;"
+                    >
+                      <source src="../assets/videos/kigali-to-the-world.mp4" type="video/mp4">
+
+                      <track
+                        kind="captions"
+                        src="../assets/transcripts/kigali-to-the-world.vtt"
+                        srclang="en"
+                        label="English captions"
+                        default
+                      >
+
+                      Your browser does not support HTML video.
+                      <a href="../assets/videos/kigali-to-the-world.mp4">Download the video</a>.
+                    </video>
+
+                    <audio
+                      id="story-audio"
+                      preload="metadata"
+                      aria-label="Kigali to the World narration"
+                      hidden
+                    >
+                      <source src="../assets/audio/kigali-to-the-world.mp3" type="audio/mpeg">
+                    </audio>
+
+                    <figcaption id="video-description">
+                      A three-minute and forty-five-second video story about
+                      Bugesera International Airport, showing the completed
+                      terminal, passenger movement through departure and
+                      arrival areas, aircraft landing and taxiing, and Rwanda’s
+                      future aviation connectivity.
+                    </figcaption>
+                  </figure>
+
+                  <p>
+                    <label for="narration-volume">Narration volume</label>
+                    <input
+                      id="narration-volume"
+                      type="range"
+                      min="0"
+                      max="100"
+                      step="5"
+                      value="100"
+                    >
+                  </p>
+
+                  <p id="audio-status" role="status" aria-live="polite" hidden></p>
+
+                  <p>
+                    <a href="../assets/transcripts/kigali-to-the-world.txt" download>Download transcript</a>
+                    |
+                    <a href="../assets/transcripts/kigali-to-the-world.vtt" download>Download captions</a>
+                  </p>
+                </div>
+              </section>
+
+              <section id="transcript" aria-labelledby="transcript-heading">
+                <div class="transcript">
+                  <h2 class="transcript__heading" id="transcript-heading">Transcript</h2>
+
+                  <p>
+                    <a href="../assets/transcripts/kigali-to-the-world.txt" download>
+                      Download this transcript as a .txt file
+                    </a>
+                  </p>
+
+                  <div class="transcript__body">
+                    <h3>00:00 — A New Gateway</h3>
+                    <p>
+                      The morning sun rises over the hills of Bugesera. Below
+                      the horizon, cranes, runways, and terminal structures are
+                      becoming a new gateway to Rwanda. This is Bugesera
+                      International Airport — a modern aviation hub designed to
+                      welcome travellers, connect businesses, and carry Rwandan
+                      stories into the world.
+                    </p>
+
+                    <h3>00:21 — Why Bugesera Is Being Built</h3>
+                    <p>
+                      For years, Kigali International Airport has served as
+                      Rwanda’s doorway to the globe. But as passenger numbers
+                      grow, airlines expand, and national ambitions rise, a
+                      larger and more efficient facility is needed. Bugesera is
+                      planned to handle bigger aircraft, increasing traffic, and
+                      future expansion, while improving the journey from arrival
+                      to departure.
+                    </p>
+
+                    <h3>00:44 — Completed Terminal Design</h3>
+                    <p>
+                      When completed, the terminal presents a calm,
+                      contemporary face: broad drop-off zones, clean lines,
+                      glass façades, shaded roofs, and clear multilingual
+                      signage. Inside, daylight fills the check-in hall,
+                      reducing harsh shadows and making the space feel open.
+                      Wide walkways, accessible counters, tactile guidance
+                      paths, clear signage, and audible announcements help every
+                      passenger move with confidence.
+                    </p>
+
+                    <h3>01:10 — Departure Passenger Journey</h3>
+                    <p>
+                      A departing traveller steps from a taxi beneath the canopy
+                      and enters a hall designed for clarity. Self-service
+                      kiosks offer a quick option for passengers without checked
+                      bags, while staffed counters support families, groups, and
+                      travellers who need assistance. After check-in, luggage
+                      moves along conveyors into sorting systems. Passengers
+                      continue through security screening, then immigration,
+                      where separate lanes can manage residents, visitors,
+                      transit passengers, and crew. Beyond the formalities, the
+                      terminal opens into departure lounges with shops, cafés,
+                      charging points, quiet seating, restrooms, and gates
+                      placed along natural walking routes.
+                    </p>
+
+                    <h3>01:50 — Arrival Passenger Journey</h3>
+                    <p>
+                      Arrivals follow an equally guided path. After the aircraft
+                      parks, passengers move through the jet bridge into the
+                      terminal. International travellers first reach
+                      immigration, where officers verify passports and entry
+                      documents. Then they proceed to baggage reclaim, where
+                      large carousels and real-time flight displays make it
+                      easier to identify the correct belt. After collecting
+                      luggage, passengers pass through customs and enter the
+                      arrivals hall, where taxis, shuttles, ride-hailing bays,
+                      rental cars, and public transport links await.
+                    </p>
+
+                    <h3>02:24 — Aircraft Landing and Airside Movement</h3>
+                    <p>
+                      Outside, the runway gives the airport its rhythm. An
+                      aircraft approaches through the East African sky, guided
+                      by air traffic control onto final alignment. Landing gear
+                      lowers, flaps extend, and the plane touches down smoothly
+                      on the centre line. Spoilers and thrust reversers slow it,
+                      while runway markings and edge lights keep the path clear.
+                      The aircraft then exits to a taxiway and moves toward its
+                      assigned stand, where ground crews, fuel trucks, catering
+                      vans, power units, and baggage tractors prepare it for the
+                      next journey.
+                    </p>
+
+                    <h3>03:02 — Cargo and Behind-the-Scenes Operations</h3>
+                    <p>
+                      But Bugesera is more than passenger halls and runways.
+                      Cargo facilities allow Rwandan products — coffee, tea,
+                      flowers, pharmaceuticals, and manufactured goods — to
+                      reach international markets quickly. Fuel farms,
+                      maintenance areas, fire stations, and control towers
+                      operate behind the scenes, keeping the airport safe,
+                      secure, and reliable.
+                    </p>
+
+                    <h3>03:23 — Rwanda’s Gateway to the World</h3>
+                    <p>
+                      Connected by roads and future transport links to Kigali
+                      and the wider region, Bugesera is built to support
+                      tourism, trade, and regional integration. When the
+                      terminal glows at dusk and planes continue to land,
+                      Rwanda’s new gateway sends a clear message: the country is
+                      ready to meet the world.
+                    </p>
+
+                    <p>
+                      <em>
+                        This StoryCast video is an educational media project
+                        based on airport design concepts and aviation
+                        storytelling. It is not an official broadcast or live
+                        operational report.
+                      </em>
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <aside class="story-sidebar" aria-label="Story details">
+              <h2 class="section-label">About This Story</h2>
+
+              <dl class="story-meta">
+                <dt>Format</dt>
+                <dd>Video story</dd>
+
+                <dt>Duration</dt>
+                <dd>3 minutes 45 seconds</dd>
+
+                <dt>Subject</dt>
+                <dd>Bugesera International Airport</dd>
+
+                <dt>Location</dt>
+                <dd>Bugesera, Rwanda</dd>
+
+                <dt>Language</dt>
+                <dd>English</dd>
+
+                <dt>Captions</dt>
+                <dd>English WebVTT captions are included with the video.</dd>
+
+                <dt>Transcript</dt>
+                <dd>
+                  <a href="#transcript">Read below</a>
+                  or
+                  <a href="../assets/transcripts/kigali-to-the-world.txt" download>
+                    download .txt
+                  </a>
+                </dd>
+
+                <dt>Accessibility</dt>
+                <dd>
+                  Designed to support WCAG 2.1 AA through semantic HTML,
+                  captions, transcript, keyboard access, and visible focus
+                  states.
+                </dd>
+              </dl>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--cream" aria-labelledby="related-heading">
+        <div class="container">
+          <h2 class="section-label" id="related-heading">Related Stories</h2>
+
+          <div class="story-grid" role="list">
+            <div class="card-wrapper" role="listitem">
+              <article class="card card--featured" aria-labelledby="related-title-1">
+                <div class="card__body">
+                  <p class="card__tag">
+                    <span class="sr-only">Format and duration:</span>
+                    Audio · 1:36
+                  </p>
+                  <h3 class="card__title" id="related-title-1">Flying Blind</h3>
+                  <p class="card__desc">
+                    A pilot navigates instrument failure over the North
+                    Atlantic — a first-person documentary of survival and
+                    instinct.
+                  </p>
+                  <a href="flying-blind.html" class="btn btn--dark">
+                    <span aria-hidden="true">▶</span>
+                    Play Story
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <div class="card-wrapper" role="listitem">
+              <article class="card" aria-labelledby="related-title-2">
+                <div class="card__body">
+                  <p class="card__tag">
+                    <span class="sr-only">Collection:</span>
+                    More Stories
+                  </p>
+                  <h3 class="card__title" id="related-title-2">Explore StoryCast</h3>
+                  <p class="card__desc">
+                    Browse more aviation stories, audio features, and accessible
+                    media projects from StoryCast.
+                  </p>
+                  <a href="../index.html#stories" class="btn btn--dark">
+                    Browse Stories
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__copy">© 2025 StoryCast Stories from the sky</p>
+      <p class="footer__copy">BSE Advanced Frontend · ALU </p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const toggle = document.querySelector('.nav__toggle');
+      const navLinks = document.querySelector('.nav__links');
+
+      if (!toggle || !navLinks) return;
+
+      const closeMenu = () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('is-open');
+      };
+
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        navLinks.classList.toggle('is-open');
+      });
+
+      navLinks.querySelectorAll('.nav__link').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      const video = document.querySelector('#story-video');
+      const audio = document.querySelector('#story-audio');
+      const narrationVolume = document.querySelector('#narration-volume');
+      const audioStatus = document.querySelector('#audio-status');
+
+      if (video && audio && narrationVolume && audioStatus) {
+        video.volume = 0.2;
+        audio.volume = Number(narrationVolume.value) / 100;
+
+        const syncAudio = () => {
+          const durationRatio =
+            Number.isFinite(video.duration) &&
+            Number.isFinite(audio.duration) &&
+            video.duration > 0
+              ? audio.duration / video.duration
+              : 1;
+          const audioTime = video.currentTime * durationRatio;
+
+          if (
+            Number.isFinite(audio.duration) &&
+            Math.abs(audio.currentTime - audioTime) > 0.25
+          ) {
+            audio.currentTime = audioTime;
+          }
+          audio.playbackRate = video.playbackRate * durationRatio;
+        };
+
+        const showAudioError = error => {
+          if (error.name === 'AbortError') return;
+
+          console.error('Unable to play the video narration.', error);
+          audioStatus.textContent = 'The narration could not be played. The video will continue without audio.';
+          audioStatus.hidden = false;
+        };
+
+        const playAudio = () => {
+          syncAudio();
+          if (audio.paused) {
+            audio.play().catch(showAudioError);
+          }
+        };
+
+        video.addEventListener('play', playAudio);
+        video.addEventListener('playing', playAudio);
+        video.addEventListener('loadedmetadata', syncAudio);
+        video.addEventListener('durationchange', syncAudio);
+        video.addEventListener('pause', () => audio.pause());
+        video.addEventListener('seeking', syncAudio);
+        video.addEventListener('timeupdate', syncAudio);
+        video.addEventListener('ratechange', syncAudio);
+        video.addEventListener('waiting', () => audio.pause());
+        audio.addEventListener('loadedmetadata', syncAudio);
+        narrationVolume.addEventListener('input', () => {
+          audio.volume = Number(narrationVolume.value) / 100;
+        });
+        audio.addEventListener('canplay', () => {
+          audioStatus.hidden = true;
+        });
+        audio.addEventListener('error', () => {
+          showAudioError(new Error('The narration audio file could not be loaded.'));
+        });
+      }
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && navLinks.classList.contains('is-open')) {
+          closeMenu();
+          toggle.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
