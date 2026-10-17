@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="StoryCast — Narrative audio and video journalism about aviation. Listen to first-person stories about the machines, people, and moments that define flight.">
+  <title>StoryCast Aviation Stories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo" aria-label="StoryCast — home">StoryCast</a>
+        <button class="nav__toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav__links" id="nav-links" role="list">
+          <li><a href="index.html" class="nav__link" aria-current="page">Home</a></li>
+          <li><a href="#stories" class="nav__link">Stories</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+        </ul>
+        <a href="story/flying-blind.html" class="nav__cta">Listen Free</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-heading" style="background-image: url('assets/images/Hero_1.png');">
+      <div class="hero__inner">
+        <span class="hero__eyebrow">Aviation Stories Told with Depth</span>
+        <h1 class="hero__title" id="hero-heading">Flying Blind</h1>
+        <p class="hero__subtitle">A fictional first-person story about a pilot facing instrument failure in a storm over the North Atlantic.</p>
+        <div class="hero__actions">
+          <a href="story/flying-blind.html#player" class="btn btn--primary"><span aria-hidden="true">▶</span> Listen Now</a>
+          <a href="story/flying-blind.html#transcript" class="btn btn--outline">Read Transcript</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--cream" aria-label="Featured episode details">
+      <div class="container">
+        <dl class="stats">
+          <div class="stats__item"><dt class="stats__label">Duration</dt><dd class="stats__value">1:36</dd></div>
+          <div class="stats__item"><dt class="stats__label">Format</dt><dd class="stats__value">Audio and transcript</dd></div>
+          <div class="stats__item"><dt class="stats__label">Published</dt><dd class="stats__value">2025</dd></div>
+          <div class="stats__item"><dt class="stats__label">Accessibility</dt><dd class="stats__value">Captions and transcript</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="stories" aria-labelledby="stories-heading">
+      <div class="container">
+        <h2 class="section-label" id="stories-heading">All Stories</h2>
+        <div class="story-grid" role="list">
+          <div class="card-wrapper" role="listitem">
+            <article class="card card--featured" aria-labelledby="card-title-1">
+              <div class="card__body">
+                <p class="card__tag"><span class="sr-only">Format and duration:</span> Audio · 1:36</p>
+                <h3 class="card__title" id="card-title-1"><a href="story/flying-blind.html#player">Flying Blind</a></h3>
+                <p class="card__desc">A pilot and co-pilot work together to find a safe way through a storm after their instruments begin to fail.</p>
+                <a href="story/flying-blind.html#player" class="btn btn--dark"><span aria-hidden="true">▶</span> Listen to audio</a>
+              </div>
+            </article>
+          </div>
+          <div class="card-wrapper" role="listitem">
+            <article class="card" aria-labelledby="card-title-2">
+              <div class="card__body">
+                <p class="card__tag"><span class="sr-only">Format and duration:</span> Audio · 1:11</p>
+                <h3 class="card__title" id="card-title-2"><a href="story/the-last-approach.html#player">The Last Approach</a></h3>
+                <p class="card__desc">During a difficult night landing, an experienced controller guides a new pilot through a tense but carefully managed approach.</p>
+                <a href="story/the-last-approach.html#player" class="btn btn--dark"><span aria-hidden="true">▶</span> Listen to audio</a>
+              </div>
+            </article>
+          </div>
+          <div class="card-wrapper" role="listitem">
+            <article class="card" aria-labelledby="card-title-3">
+              <div class="card__body">
+                <p class="card__tag"><span class="sr-only">Format and durations:</span> Video · 3:45 · Narration · 3:35</p>
+                <h3 class="card__title" id="card-title-3"><a href="story/kigali-to-the-world.html#video-player">Kigali to the World</a></h3>
+                <p class="card__desc">A guided video story about Bugesera International Airport, showing how Rwanda’s next-generation gateway connects the country to the world.</p>
+                <a href="story/kigali-to-the-world.html#video-player" class="btn btn--dark"><span aria-hidden="true">▶</span> Watch video</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__copy">© 2025 StoryCast Stories from the sky</p>
+      <p class="footer__copy">BSE Advanced Frontend · ALU</p>
+    </div>
+  </footer>
+  <script>
+    const toggle = document.querySelector('.nav__toggle');
+    const navLinks = document.querySelector('.nav__links');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('is-open');
+    });
+    navLinks.querySelectorAll('.nav__link').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('is-open');
+      });
+    });
+  </script>
+</body>
+</html>
