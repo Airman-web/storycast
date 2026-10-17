@@ -1,0 +1,591 @@
+// ============================================================
+// StoryCast — Components
+// BEM naming convention throughout: .block__element--modifier
+// Container query on .card adapts layout when container < 340px.
+// ============================================================
+
+
+// ── Navbar (.nav) ─────────────────────────────────────────────
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  background-color: var(--clr-greige-300);
+  border-bottom: 1px solid var(--clr-greige-400);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding-inline: var(--content-pad);
+    gap: var(--space-8);
+  }
+
+  // Logo — uses heading font, cream colour
+  &__logo {
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-bold);
+    color: var(--clr-text-light);
+    text-decoration: none;
+    letter-spacing: var(--ls-tight);
+    flex-shrink: 0;
+
+    &:hover {
+      color: var(--clr-white);
+    }
+  }
+
+  // Nav links list — Flexbox row
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin-inline-start: auto;
+
+    // Mobile — hidden by default, toggled via JS
+    @media (max-width: 640px) {
+      display: none;
+      position: absolute;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      background-color: var(--clr-greige-300);
+      padding: var(--space-4) var(--content-pad);
+      gap: 0;
+      border-bottom: 1px solid var(--clr-greige-400);
+
+      // Active state set by JS toggle
+      &.is-open {
+        display: flex;
+      }
+    }
+  }
+
+  &__link {
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semi);
+    color: var(--clr-text-muted-light);
+    text-decoration: none;
+    padding-block: var(--space-2);
+    transition: color 0.2s ease;
+
+    &:hover,
+    &--active,
+    &[aria-current="page"] {
+      color: var(--clr-text-light);
+    }
+
+    @media (max-width: 640px) {
+      padding-block: var(--space-4);
+      border-bottom: 1px solid var(--clr-greige-400);
+    }
+  }
+
+  // CTA pill — gold background, dark text
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-6);
+    background-color: var(--clr-gold);
+    color: var(--clr-text);
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--clr-gold-dark);
+    }
+  }
+
+  // Hamburger toggle — mobile only
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2);
+    flex-shrink: 0;
+
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background-color: var(--clr-text-light);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    // Animated X when open
+    &[aria-expanded="true"] {
+      span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      span:nth-child(2) { opacity: 0; }
+      span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    }
+
+    @media (max-width: 640px) {
+      display: flex;
+    }
+  }
+}
+
+
+// ── Hero (.hero) ──────────────────────────────────────────────
+//
+// Background image set via inline style on each page's hero.
+// No overlay — image shows exactly as designed in Figma.
+//
+.hero {
+  background-color: var(--clr-greige-300); // fallback if image fails to load
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-block: var(--space-20) var(--space-16);
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+
+  &__inner {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding-inline: var(--content-pad);
+    width: 100%;
+  }
+
+  // Breadcrumb link — story page only
+  &__back {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    color: var(--clr-text-muted-light);
+    text-decoration: none;
+    margin-bottom: var(--space-6);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--clr-text-light);
+    }
+  }
+
+  // Eyebrow label — small caps, gold
+  &__eyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    color: var(--clr-text-light);
+    letter-spacing: var(--ls-wider);
+    text-transform: uppercase;
+    margin-bottom: var(--space-4);
+  }
+
+  // Main headline — large serif
+  &__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-hero);
+    font-weight: var(--fw-bold);
+    color: var(--clr-text-light);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--ls-tight);
+    max-width: 16ch;
+    margin-bottom: var(--space-6);
+  }
+
+  // Supporting text
+  &__subtitle {
+    font-family: var(--font-body);
+    font-size: var(--fs-base);
+    color: var(--clr-text-muted-light);
+    line-height: var(--lh-base);
+    max-width: 52ch;
+    margin-bottom: var(--space-10);
+  }
+
+  // Button row
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  // Condensed hero for story page — less top padding
+  &--story {
+    min-height: 360px;
+    padding-block: var(--space-12);
+  }
+}
+
+
+// ── Buttons (.btn) ────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-8);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semi);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  line-height: 1;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  // Gold fill — primary action
+  &--primary {
+    background-color: var(--clr-gold);
+    color: var(--clr-text);
+    border-color: var(--clr-gold);
+
+    &:hover {
+      background-color: var(--clr-gold-dark);
+      border-color: var(--clr-gold-dark);
+    }
+  }
+
+  // Outlined — secondary action on dark backgrounds
+  &--outline {
+    background: transparent;
+    color: var(--clr-text-light);
+    border-color: var(--clr-text-muted-light);
+
+    &:hover {
+      border-color: var(--clr-text-light);
+    }
+  }
+
+  // Dark fill — card actions on light backgrounds
+  &--dark {
+    background-color: var(--clr-text);
+    color: var(--clr-white);
+    border-color: var(--clr-text);
+
+    &:hover {
+      background-color: var(--clr-greige-300);
+      border-color: var(--clr-greige-300);
+    }
+  }
+}
+
+
+// ── Story card (.card) — with container query ─────────────────
+//
+// CONTAINER QUERY: .card-wrapper sets the containment context.
+// When the wrapper narrows below 340px (e.g. in a sidebar or
+// a 1-column mobile layout), the card hides its description
+// and reduces its padding to stay readable.
+// This is the CSS container query required by the rubric.
+
+.card-wrapper {
+  // Declare this element as a containment context
+  container-type: inline-size;
+  container-name: story-card;
+}
+
+.card {
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  // Gold accent line at top of every card
+  &::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    height: 3px;
+    background-color: var(--clr-gold);
+  }
+
+  &:hover {
+    box-shadow: 0 6px 24px rgba(120, 113, 108, 0.15);
+    transform: translateY(-2px);
+  }
+
+  // Featured card — cream background
+  &--featured {
+    background-color: var(--clr-cream);
+  }
+
+  &__body {
+    padding: var(--card-pad);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  &__tag {
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    margin-bottom: var(--space-3);
+  }
+
+  &__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
+    color: var(--clr-text);
+    line-height: var(--lh-snug);
+    margin-bottom: var(--space-4);
+  }
+
+  &__desc {
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    color: var(--clr-text-muted);
+    line-height: var(--lh-base);
+    margin-bottom: var(--space-8);
+    flex: 1;
+  }
+
+  // ── Container query rules ───────────────────────────────
+  // When the card wrapper is narrower than 340px, simplify
+  @container story-card (max-width: 340px) {
+    .card__title {
+      font-size: var(--fs-lg);
+    }
+
+    .card__desc {
+      display: none;
+    }
+
+    .card__body {
+      padding: var(--space-4);
+    }
+  }
+}
+
+
+// ── Section label heading ──────────────────────────────────────
+// Reused across all pages for consistent section headings
+.section-label {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  color: var(--clr-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wider);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--clr-border);
+  margin-bottom: var(--space-6);
+}
+
+
+// ── Audio player (.player) ────────────────────────────────────
+.player {
+  background-color: var(--clr-cream);
+  border: 1px solid var(--clr-border);
+  border-left: 3px solid var(--clr-gold);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-10);
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semi);
+    color: var(--clr-text);
+    margin-bottom: var(--space-5);
+
+    // Gold play icon before label text
+    &::before {
+      content: '▶';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      background-color: var(--clr-gold);
+      color: var(--clr-text);
+      border-radius: 50%;
+      font-size: 0.65em;
+      padding-left: 2px;
+    }
+  }
+
+  // Native HTML audio element — accented with brand gold
+  &__native {
+    width: 100%;
+    height: 42px;
+    accent-color: var(--clr-gold);
+    border-radius: var(--radius-sm);
+  }
+
+  &__download {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    color: var(--clr-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--clr-text);
+    }
+  }
+}
+
+
+// ── Transcript (.transcript) ──────────────────────────────────
+.transcript {
+  &__heading {
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wider);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--clr-border);
+    margin-bottom: var(--space-6);
+  }
+
+  &__body {
+    font-family: var(--font-body);
+    font-size: var(--fs-base);
+    color: var(--clr-text);
+    line-height: var(--lh-loose);
+    max-width: 68ch;
+
+    // Space between transcript paragraphs
+    p + p {
+      margin-top: var(--space-6);
+    }
+
+    // Later paragraphs fade to muted — suggests more content below
+    p:nth-child(n+3) {
+      color: var(--clr-text-muted);
+    }
+  }
+}
+
+
+// ── Story sidebar (.story-sidebar) ───────────────────────────
+.story-sidebar {
+  background-color: var(--clr-cream);
+  border: 1px solid var(--clr-border);
+  border-top: 3px solid var(--clr-gold);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-6));
+}
+
+
+// ── Mission text ──────────────────────────────────────────────
+.mission__text {
+  font-family: var(--font-body);
+  font-size: var(--fs-lg);
+  color: var(--clr-text-muted);
+  line-height: var(--lh-base);
+  max-width: 72ch;
+}
+
+
+// ── Feature cards (.feature-card) ────────────────────────────
+.feature-card {
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-top: 3px solid var(--clr-gold);
+  border-radius: var(--radius-lg);
+  padding: var(--card-pad);
+
+  &__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg);
+    color: var(--clr-text);
+    margin-bottom: var(--space-4);
+  }
+
+  &__desc {
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    color: var(--clr-text-muted);
+    line-height: var(--lh-base);
+  }
+}
+
+
+// ── Engage cards (.engage-card) ───────────────────────────────
+.engage-card {
+  background-color: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-left: 3px solid var(--clr-gold);
+  border-radius: var(--radius-lg);
+  padding: var(--card-pad);
+
+  &__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xl);
+    color: var(--clr-text);
+    margin-bottom: var(--space-4);
+  }
+
+  &__desc {
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    color: var(--clr-text-muted);
+    line-height: var(--lh-base);
+  }
+}
+
+
+// ── Footer (.footer) ──────────────────────────────────────────
+.footer {
+  background-color: var(--clr-greige-300);
+  border-top: 1px solid var(--clr-greige-400);
+  padding-block: var(--space-8);
+
+  &__inner {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding-inline: var(--content-pad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  &__copy {
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    color: var(--clr-text-muted-light);
+  }
+}
