@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Flying Blind A pilot's first-person account of navigating instrument failure over the North Atlantic. Full audio story with transcript and captions.">
+  <title>Flying Blind StoryCast</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- One level up from /story/ -->
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ══════════════════════════════════════════════════
+       Navigation
+  ══════════════════════════════════════════════════ -->
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav__inner">
+        <a href="../index.html" class="nav__logo" aria-label="StoryCast — home">
+          StoryCast
+        </a>
+        <button
+          class="nav__toggle"
+          aria-expanded="false"
+          aria-controls="nav-links"
+          aria-label="Open navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav__links" id="nav-links" role="list">
+          <li><a href="../index.html" class="nav__link">Home</a></li>
+          <li>
+            <a href="../index.html#stories" class="nav__link" aria-current="page">
+              Stories
+            </a>
+          </li>
+          <li><a href="../about.html" class="nav__link">About</a></li>
+        </ul>
+        <a href="#player" class="nav__cta">Listen Free</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════
+       Main content
+  ══════════════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ── Story hero ────────────────────────────────── -->
+    <section class="hero hero--story" aria-labelledby="story-title" style="background-image: url('../assets/images/Hero_2.png');">
+      <div class="hero__inner">
+        <a href="../index.html" class="hero__back">← All Stories</a>
+        <p class="hero__eyebrow">Audio Story · 1 Min 36 Sec · 2025</p>
+        <h1 class="hero__title" id="story-title">Flying Blind</h1>
+        <p class="hero__subtitle">
+          A pilot's first-person account of navigating a severe storm with
+          complete instrument failure over the North Atlantic Ocean.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Story body — two-column grid ─────────────── -->
+    <section class="section" aria-label="Story content">
+      <div class="container">
+        <div class="story-layout">
+
+          <!-- Main column — player + transcript -->
+          <div>
+
+            <!-- Audio player -->
+            <section id="player" aria-labelledby="player-label">
+              <div class="player">
+                <p class="player__label" id="player-label">
+                  Flying Blind Full Episode
+                </p>
+
+                <!--
+                  Accessible audio element:
+                  • controls attribute provides keyboard-operable playback UI
+                  • <track> provides WebVTT captions (kind="captions")
+                  • <figcaption> gives screen readers a text description
+                  • Fallback link shown if browser has no audio support
+                -->
+                <figure>
+                  <audio
+                    class="player__native"
+                    controls
+                    aria-labelledby="player-label"
+                    aria-describedby="audio-desc"
+                  >
+                    <source
+                      src="../assets/audio/speech.wav"
+                      type="audio/wav"
+                    >
+                    <track
+                      kind="captions"
+                      src="../assets/transcripts/flying-blind.vtt"
+                      srclang="en"
+                      label="English captions"
+                      default
+                    >
+                    <p>
+                      Your browser does not support audio playback.
+                      <a href="../assets/audio/speech.wav">
+                        Download the audio file
+                      </a>
+                      and open it in any media player.
+                    </p>
+                  </audio>
+                  <figcaption class="sr-only" id="audio-desc">
+                    Audio documentary: Flying Blind.
+                    Narrator: Captain James Osei.
+                    Duration: 1 minute and 36 seconds.
+                    Full transcript available below.
+                  </figcaption>
+                </figure>
+
+                <a
+                  href="../assets/transcripts/flying-blind.txt"
+                  download="flying-blind-transcript.txt"
+                  class="player__download"
+                  aria-label="Download full transcript as a text file"
+                >
+                  ↓ Download full transcript (.txt)
+                </a>
+              </div>
+            </section>
+
+            <!-- Transcript -->
+            <section id="transcript" aria-labelledby="transcript-heading">
+              <div class="transcript">
+                <h2 class="transcript__heading" id="transcript-heading">
+                  Transcript
+                </h2>
+                <div class="transcript__body">
+                  <p>
+                    The altimeter was spinning. I remember that clearly not because it was
+                    unusual, but because of how slowly it moved, like it had something important
+                    to say. Outside the cockpit there was nothing. No horizon. No lights below.
+                    Just grey pressing in from every direction, the kind of dark that swallows
+                    you whole if you let it.
+                  </p>
+                  <p>
+                    Tower had gone silent twenty minutes earlier. My co-pilot, Marcus, was
+                    working the radios but getting nothing back just static and the sound of
+                    rain hammering against the fuselage. We were somewhere over the North
+                    Atlantic. Eleven thousand feet, according to the instruments. I wasn't sure
+                    I believed them anymore.
+                  </p>
+                  <p>
+                    I looked at Marcus. He looked at me. Neither of us said a word for ten
+                    seconds. That silence was the loudest thing I have ever heard inside a
+                    cockpit. Then he said, quietly, "What do you want to do?" And I realised
+                    that no one was going to answer that question except me.
+                  </p>
+                  <p>
+                    I had trained for instrument failure. Every pilot does. But training happens
+                    in a simulator, in a building, with an instructor who already knows the
+                    answer. This was different. This was seven tonnes of metal and forty-two
+                    passengers, and the only person who could bring them home was the one
+                    holding the yoke.
+                  </p>
+                  <p>
+                    I went back to basics. Attitude. Altitude. Airspeed. The three things your
+                    body wants to abandon when it can't see and the instruments are lying. I
+                    held the wings level by feel and started to climb, slowly, because height
+                    is time and time is options. Marcus got a partial signal on the secondary
+                    radio just enough to get a bearing.
+                  </p>
+                  <p>
+                    Forty minutes later we broke through the clouds. There were lights below.
+                    I have landed that aircraft more than a thousand times and I have never felt the
+                    wheels touch down the way I felt them that night.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+          </div><!-- end main column -->
+
+          <!-- Sidebar — story metadata -->
+          <aside class="story-sidebar" aria-label="Story details">
+            <h2 class="section-label">About This Story</h2>
+            <dl class="story-meta">
+              <dt>Narrator</dt>
+              <dd>Captain James Osei</dd>
+              <dt>Format</dt>
+              <dd>Audio Documentary</dd>
+              <dt>Duration</dt>
+              <dd>1 minute 36 seconds</dd>
+              <dt>Published</dt>
+              <dd>March 2025</dd>
+              <dt>Language</dt>
+              <dd>English</dd>
+              <dt>Captions</dt>
+              <dd>English captions included</dd>
+              <dt>Transcript</dt>
+              <dd>
+                <a href="#transcript">Read below</a> or
+                <a href="../assets/transcripts/flying-blind.txt" download>
+                  download (.txt)
+                </a>
+              </dd>
+            </dl>
+          </aside>
+
+        </div><!-- end story-layout -->
+
+        <!-- Related stories -->
+        <section aria-labelledby="related-heading">
+          <h2 class="section-label" id="related-heading">Related Stories</h2>
+          <div class="story-grid story-grid--related" role="list">
+
+            <div class="card-wrapper" role="listitem">
+              <article class="card" aria-labelledby="rel-title-1">
+                <div class="card__body">
+                  <p class="card__tag">Video · 24 min</p>
+                  <h3 class="card__title" id="rel-title-1">Kigali to the World</h3>
+                  <p class="card__desc">
+                    RwandAir's rise as Africa's fastest growing airline
+                    from a single runway to a continental network.
+                  </p>
+                  <a href="kigali-to-the-world.html#video-player" class="btn btn--dark"
+                    aria-label="Watch Kigali to the World video">
+                    Watch video →
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <div class="card-wrapper" role="listitem">
+              <article class="card" aria-labelledby="rel-title-2">
+                <div class="card__body">
+                  <p class="card__tag">Audio · 32 min</p>
+                  <h3 class="card__title" id="rel-title-2">The Last Approach</h3>
+                  <p class="card__desc">
+                    The final radio transmissions of three historic flights
+                    and the reforms that followed.
+                  </p>
+                  <a href="the-last-approach.html#player" class="btn btn--dark"
+                    aria-label="Listen to The Last Approach">
+                    Listen →
+                  </a>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════
+       Footer
+  ══════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__copy">© 2025 StoryCast Stories from the sky</p>
+      <p class="footer__copy">BSE Advanced Frontend · ALU · </p>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav__toggle');
+    const navLinks = document.querySelector('.nav__links');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('is-open');
+    });
+  </script>
+
+</body>
+</html>
