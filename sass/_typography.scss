@@ -1,0 +1,47 @@
+// ============================================================
+// StoryCast — Typography Tokens
+// Fluid font sizes using clamp() so type scales smoothly
+// between mobile and desktop without hard breakpoints.
+// Playfair Display for headings — editorial serif feel.
+// Inter for body — clean, readable at all sizes.
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  // ── Font families ───────────────────────────────────────
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+
+  // ── Fluid font scale ────────────────────────────────────
+  // clamp(minimum, preferred, maximum)
+  // minimum  = smallest screens (≈375px)
+  // preferred = scales with viewport width
+  // maximum  = largest screens (≈1440px)
+  --fs-xs:   clamp(0.70rem,  0.9vw,  0.80rem);   //  ~11–13px
+  --fs-sm:   clamp(0.85rem,  1.1vw,  0.95rem);   //  ~14–15px
+  --fs-base: clamp(1rem,     1.3vw,  1.05rem);   //  ~16–17px
+  --fs-lg:   clamp(1.15rem,  1.8vw,  1.40rem);   //  ~18–22px
+  --fs-xl:   clamp(1.40rem,  2.5vw,  1.75rem);   //  ~22–28px
+  --fs-2xl:  clamp(1.75rem,  3.5vw,  2.25rem);   //  ~28–36px
+  --fs-3xl:  clamp(2.25rem,  5vw,    3.50rem);   //  ~36–56px
+  --fs-hero: clamp(3.00rem,  7vw,    5.50rem);   //  ~48–88px
+
+  // ── Font weights ────────────────────────────────────────
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+
+  // ── Line heights ────────────────────────────────────────
+  --lh-tight:  1.15;   // large headings
+  --lh-snug:   1.35;   // subheadings, card titles
+  --lh-base:   1.65;   // body paragraphs
+  --lh-loose:  1.85;   // transcripts, long reads
+
+  // ── Letter spacing ──────────────────────────────────────
+  --ls-tight:  -0.025em;   // hero headlines
+  --ls-normal:  0;
+  --ls-wide:    0.06em;    // section labels
+  --ls-wider:   0.12em;    // eyebrow / tag labels
+}
