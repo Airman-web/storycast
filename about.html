@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About StoryCast — our mission, how we approach accessibility, and how you can engage with aviation stories regardless of ability.">
+  <title>About — StoryCast</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ══════════════════════════════════════════════════
+       Navigation
+  ══════════════════════════════════════════════════ -->
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo" aria-label="StoryCast — home">
+          StoryCast
+        </a>
+        <button
+          class="nav__toggle"
+          aria-expanded="false"
+          aria-controls="nav-links"
+          aria-label="Open navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav__links" id="nav-links" role="list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="index.html#stories" class="nav__link">Stories</a></li>
+          <li>
+            <a href="about.html" class="nav__link" aria-current="page">About</a>
+          </li>
+        </ul>
+        <a href="story/flying-blind.html" class="nav__cta">Listen Free</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════
+       Main content
+  ══════════════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ── Hero ─────────────────────────────────────── -->
+    <section class="hero" aria-labelledby="about-heading" style="background-image: url('assets/images/Hero_3.png');">
+      <div class="hero__inner">
+        <span class="hero__eyebrow">About StoryCast</span>
+        <h1 class="hero__title" id="about-heading">
+          Stories that belong to everyone.
+        </h1>
+        <p class="hero__subtitle">
+          An accessible audio and video platform built around aviation.
+          Every story is designed to be heard, read, or navigated by anyone 
+          regardless of ability, device, or connection speed.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Mission ──────────────────────────────────── -->
+    <section class="section section--cream" aria-labelledby="mission-heading">
+      <div class="container">
+        <h2 class="section-label" id="mission-heading">Our Mission</h2>
+        <p class="mission__text">
+          We believe aviation stories deserve to reach every listener. That means
+          building for screen readers, keyboards, low-bandwidth connections, and
+          every device in between. Accessibility is not a feature we added at the
+          end — it is the foundation the entire platform was built on.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Accessibility features ───────────────────── -->
+    <section class="section" aria-labelledby="a11y-heading">
+      <div class="container">
+        <h2 class="section-label" id="a11y-heading">Accessibility Features</h2>
+
+        <div class="features-grid">
+
+          <article class="feature-card" aria-labelledby="feat-1">
+            <h3 class="feature-card__title" id="feat-1">
+              Captions and Transcripts
+            </h3>
+            <p class="feature-card__desc">
+              Every audio and video story includes full closed captions delivered
+              via WebVTT and a complete written transcript available inline on the
+              page or as a plain-text download. No story requires working audio to
+              follow.
+            </p>
+          </article>
+
+          <article class="feature-card" aria-labelledby="feat-2">
+            <h3 class="feature-card__title" id="feat-2">
+              Keyboard Navigation
+            </h3>
+            <p class="feature-card__desc">
+              All interactive elements links, buttons, the audio player, and
+              navigation are fully reachable and operable using a keyboard alone.
+              Tab order follows a logical left to right, top to bottom reading
+              sequence on every page.
+            </p>
+          </article>
+
+          <article class="feature-card" aria-labelledby="feat-3">
+            <h3 class="feature-card__title" id="feat-3">
+              Colour Contrast WCAG AA
+            </h3>
+            <p class="feature-card__desc">
+              All text on content sections meets a minimum 4.5:1 contrast ratio
+              against its background. Hero text on the warm greige gradient meets
+              4.5:1 against the darkest point of the gradient. All ratios have been
+              independently verified.
+            </p>
+          </article>
+
+          <article class="feature-card" aria-labelledby="feat-4">
+            <h3 class="feature-card__title" id="feat-4">
+              Screen Reader Support
+            </h3>
+            <p class="feature-card__desc">
+              All pages use semantic HTML5 elements including header, main, nav, section,
+              article, aside, figure, and footer so screen readers can navigate by
+              landmark. ARIA labels are added only where semantic HTML is not
+              sufficient on its own.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── How to engage ────────────────────────────── -->
+    <section class="section section--cream" aria-labelledby="engage-heading">
+      <div class="container">
+        <h2 class="section-label" id="engage-heading">How to Engage</h2>
+
+        <div class="engage-grid">
+
+          <article class="engage-card" aria-labelledby="engage-1">
+            <h3 class="engage-card__title" id="engage-1">Listen</h3>
+            <p class="engage-card__desc">
+              Stream any story directly in your browser using the native HTML audio
+              player. No account needed, no app to download, and no plugin required
+              on any device or operating system.
+            </p>
+          </article>
+
+          <article class="engage-card" aria-labelledby="engage-2">
+            <h3 class="engage-card__title" id="engage-2">Read</h3>
+            <p class="engage-card__desc">
+              Every story has a full transcript printed below the player on the
+              story page. Read at your own pace with no time pressure, or download
+              the transcript as a plain-text file to read offline.
+            </p>
+          </article>
+
+          <article class="engage-card" aria-labelledby="engage-3">
+            <h3 class="engage-card__title" id="engage-3">Share</h3>
+            <p class="engage-card__desc">
+              Each story has its own permanent URL. Copy the address bar and share
+              it directly. The person on the receiving end does not need an account
+              or any software to access the story.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════
+       Footer
+  ══════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__copy">© 2025 StoryCast Stories from the sky</p>
+      <p class="footer__copy">BSE Advanced Frontend · ALU · </p>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav__toggle');
+    const navLinks = document.querySelector('.nav__links');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('is-open');
+    });
+  </script>
+
+</body>
+</html>
