@@ -1,0 +1,213 @@
+// ============================================================
+// StoryCast — Layout
+// Global reset, body base, container, CSS Grid layouts,
+// and the container query that adapts story cards.
+// Combines Grid (page structure) and Flexbox (components).
+// ============================================================
+
+// ── Reset ────────────────────────────────────────────────────
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  // Prevents layout shift when scrollbar appears
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video,
+audio {
+  max-width: 100%;
+  display: block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+// ── Container ─────────────────────────────────────────────────
+// Single max-width wrapper used on every page section.
+.container {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--content-pad);
+  width: 100%;
+}
+
+// ── Section wrappers ──────────────────────────────────────────
+.section {
+  padding-block: var(--section-pad);
+
+  &--cream {
+    background-color: var(--clr-cream);
+  }
+
+  &--white {
+    background-color: var(--clr-white);
+  }
+}
+
+// ── Story card grid ───────────────────────────────────────────
+// CSS Grid: 3 columns on desktop, 2 on tablet, 1 on mobile.
+// gap scales fluidly using the --grid-gap token.
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gap);
+  margin-top: var(--space-6);
+
+  // Tablet — 2 columns
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // Mobile — single column
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+
+  // Related stories — always max 3, but can shrink
+  &--related {
+    margin-top: var(--space-6);
+  }
+}
+
+// ── Story page layout — content + sidebar ─────────────────────
+// CSS Grid: main transcript column + fixed-width sidebar.
+// Sidebar drops below main on tablet and mobile.
+.story-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-12);
+  align-items: start;
+
+  // Tablet and below — sidebar goes below content
+  @media (max-width: 880px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+}
+
+// ── Accessibility features grid — 2×2 ────────────────────────
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--grid-gap);
+  margin-top: var(--space-6);
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Engage grid — 3 columns ───────────────────────────────────
+.engage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gap);
+  margin-top: var(--space-6);
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Stats strip ───────────────────────────────────────────────
+// Flexbox row of stat items — wraps on very small screens.
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+
+  &__item {
+    flex: 1 1 160px;
+    text-align: center;
+    padding: var(--space-5) var(--space-4);
+
+    // Vertical divider between items using pseudo-element
+    &:not(:last-child) {
+      border-right: 1px solid var(--clr-border);
+    }
+  }
+
+  &__value {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
+    color: var(--clr-text);
+    margin-bottom: var(--space-1);
+  }
+
+  &__label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wider);
+  }
+
+  // Mobile — remove dividers, wrap freely
+  @media (max-width: 480px) {
+    &__item {
+      border-right: none !important;
+      border-bottom: 1px solid var(--clr-border);
+    }
+  }
+}
+
+// ── Story sidebar meta list ───────────────────────────────────
+// Definition list used for story metadata in the sidebar.
+.story-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2) var(--space-6);
+  align-items: baseline;
+
+  dt {
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    white-space: nowrap;
+  }
+
+  dd {
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    color: var(--clr-text);
+  }
+}
