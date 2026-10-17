@@ -1,0 +1,24 @@
+// ============================================================
+// StoryCast — main.scss
+// Modern Dart Sass entry point using @use.
+// @use must appear before all other rules — layer declaration
+// sits at the top of _layout.scss and _components.scss.
+//
+// Compile:
+//   sass sass/main.scss css/main.css
+//   sass sass/main.scss css/main.css --watch --style=compressed
+// ============================================================
+
+// ── 1. Tokens (CSS custom properties on :root) ────────────────
+@use 'colors';
+@use 'typography';
+@use 'spacing';
+
+// ── 2. Accessibility (skip link, focus, reduced motion) ───────
+@use 'accessibility';
+
+// ── 3. Layout (reset, container, grid) ────────────────────────
+@use 'layout';
+
+// ── 4. Components (navbar, cards, player, footer) ─────────────
+@use 'components';
