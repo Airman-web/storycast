@@ -37,7 +37,7 @@ storycast/
 │   │   ├── the-last-approach.wav      # The Last Approach audio
 │   │   └── kigali-to-the-world.mp3    # Kigali narration audio
 │   ├── videos/
-│   │   └── kigali-to-the-world.mp4    # Kigali video
+│   │   └── kigali-to-the-world.mp4    # Local copy (ignored by Git; hosted on YouTube)
 │   ├── transcripts/
 │   │   ├── flying-blind.txt           # Flying Blind transcript
 │   │   ├── flying-blind.vtt           # Flying Blind captions
@@ -63,9 +63,50 @@ storycast/
 | [`story/the-last-approach.html`](./story/the-last-approach.html) | The Last Approach audio, transcript, and related story cards |
 | [`story/kigali-to-the-world.html`](./story/kigali-to-the-world.html) | Kigali video, synchronized narration, captions, transcript, and related stories |
 
-Story cards link to the relevant story page and media player. The media is
-provided as local files in `assets/`, so no third-party streaming service is
-needed.
+Story cards link to the relevant story page and media player. Audio, captions,
+transcripts, and images are stored in the repository. The Kigali MP4 exceeds
+GitHub's 100 MB per-file limit, so the local copy is excluded from Git and the
+page embeds the video from YouTube instead:
+
+- [Watch Kigali to the World on YouTube](https://youtu.be/36bHtXBAwvw)
+- The page uses the YouTube IFrame Player API to synchronize playback with the
+  narration audio and the local WebVTT captions.
+- The narration audio, WebVTT captions, and transcript remain in
+  `assets/audio/` and `assets/transcripts/` and should be committed normally.
+- Keep the YouTube video public or unlisted and allow embedding. If it is
+  private, blocked from embedding, or unavailable, visitors can use the
+  “Open video on YouTube” link.
+
+Do not add the oversized MP4 to regular Git history. If a downloadable video
+must be stored in the repository rather than streamed from YouTube, use Git
+LFS and check its storage and bandwidth quotas before pushing.
+
+### Video publishing issue and caption setup
+
+The original Kigali MP4 is over GitHub's 100 MB per-file limit, so pushing it
+as a regular repository file is rejected. The video is hosted on YouTube and
+embedded on the story page instead. The MP4 is ignored locally; the smaller
+narration MP3, WebVTT caption file, and text transcript are separate project
+assets and remain available to the page.
+
+Uploading the MP4 to YouTube does **not** add the project's separate `.vtt`
+captions or narration MP3 to that upload. The Kigali story page therefore uses
+the YouTube IFrame Player API for video playback and overlays the local VTT
+captions in a positioned layer above the embedded player. The captions were
+initially not visible because a YouTube iframe is not an HTML `<video>` element
+and cannot use this project's local VTT through a `<track>` element. The page
+now loads the VTT itself and explicitly layers its caption overlay above the
+YouTube iframe. The **Play video with narration** button starts the YouTube
+video and local MP3 together; the captions toggle controls the VTT overlay.
+This arrangement keeps the video stream on YouTube while the project retains
+its captions, narration, and transcript.
+
+For local testing, run the project through the HTTP server described below.
+Fetching the VTT sidecar with JavaScript may fail when the HTML page is opened
+directly as a `file://` URL. On the deployed site, check that the YouTube
+video is public or unlisted, embedding is allowed, and the VTT and MP3 assets
+are included in the repository. If the embed is blocked, use the direct
+YouTube link; the transcript remains available on the story page.
 
 ## Run locally
 

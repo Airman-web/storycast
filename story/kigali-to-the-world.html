@@ -110,37 +110,19 @@
                   <p class="player__label">Kigali to the World</p>
 
                   <p>
-                    The narration plays in sync with the video and its English
-                    captions. The original video soundtrack stays quieter in
-                    the background. Use the narration slider below to adjust
-                    its volume; the video volume control adjusts the background
-                    soundtrack. Use the captions or CC control to show captions.
-                    A full transcript is provided below.
+                    Play the video with narration to start both tracks together.
+                    English captions are shown over the video and can be
+                    toggled below. The video soundtrack stays quieter in the
+                    background. A full transcript is provided below.
                   </p>
 
                   <figure>
-                    <video
-                      id="story-video"
-                      controls
-                      preload="metadata"
-                      playsinline
-                      poster="../assets/images/Hero_2.png"
-                      aria-describedby="video-description"
-                      style="width: 100%; height: auto; display: block; border-radius: 8px; background: #1c1917;"
-                    >
-                      <source src="../assets/videos/kigali-to-the-world.mp4" type="video/mp4">
-
-                      <track
-                        kind="captions"
-                        src="../assets/transcripts/kigali-to-the-world.vtt"
-                        srclang="en"
-                        label="English captions"
-                        default
-                      >
-
-                      Your browser does not support HTML video.
-                      <a href="../assets/videos/kigali-to-the-world.mp4">Download the video</a>.
-                    </video>
+                    <div class="video-frame">
+                      <div id="story-video"></div>
+                      <div class="video-caption-overlay is-hidden" aria-live="polite" aria-atomic="true">
+                        <span id="video-caption"></span>
+                      </div>
+                    </div>
 
                     <audio
                       id="story-audio"
@@ -161,6 +143,15 @@
                   </figure>
 
                   <p>
+                    <button id="story-play" class="btn btn--primary" type="button" disabled>
+                      Play video with narration
+                    </button>
+                    <button id="captions-toggle" class="btn btn--dark" type="button" aria-pressed="true">
+                      Hide captions
+                    </button>
+                  </p>
+
+                  <p>
                     <label for="narration-volume">Narration volume</label>
                     <input
                       id="narration-volume"
@@ -173,8 +164,11 @@
                   </p>
 
                   <p id="audio-status" role="status" aria-live="polite" hidden></p>
+                  <p id="caption-status" role="status" aria-live="polite" hidden></p>
 
                   <p>
+                    <a href="https://youtu.be/36bHtXBAwvw">Open video on YouTube</a>
+                    |
                     <a href="../assets/transcripts/kigali-to-the-world.txt" download>Download transcript</a>
                     |
                     <a href="../assets/transcripts/kigali-to-the-world.vtt" download>Download captions</a>
@@ -324,7 +318,7 @@
                 <dd>English</dd>
 
                 <dt>Captions</dt>
-                <dd>English WebVTT captions are included with the video.</dd>
+                <dd>English WebVTT captions are synchronized and overlaid by this page.</dd>
 
                 <dt>Transcript</dt>
                 <dd>
@@ -427,68 +421,196 @@
         link.addEventListener('click', closeMenu);
       });
 
-      const video = document.querySelector('#story-video');
       const audio = document.querySelector('#story-audio');
       const narrationVolume = document.querySelector('#narration-volume');
       const audioStatus = document.querySelector('#audio-status');
+      const captionStatus = document.querySelector('#caption-status');
+      const playButton = document.querySelector('#story-play');
+      const captionsToggle = document.querySelector('#captions-toggle');
+      const captionOverlay = document.querySelector('.video-caption-overlay');
+      const captionText = document.querySelector('#video-caption');
+      const YOUTUBE_VIDEO_ID = '36bHtXBAwvw';
+      let player;
+      let playerReady = false;
+      let playerState = -1;
+      let syncTimer;
+      let cues = [];
 
-      if (video && audio && narrationVolume && audioStatus) {
-        video.volume = 0.2;
-        audio.volume = Number(narrationVolume.value) / 100;
+      const showStatus = message => {
+        audioStatus.textContent = message;
+        audioStatus.hidden = false;
+      };
 
-        const syncAudio = () => {
-          const durationRatio =
-            Number.isFinite(video.duration) &&
-            Number.isFinite(audio.duration) &&
-            video.duration > 0
-              ? audio.duration / video.duration
-              : 1;
-          const audioTime = video.currentTime * durationRatio;
+      const setPlayButtonLabel = () => {
+        if (!playerReady) return;
+        if (playerState === YT.PlayerState.PLAYING && audio.paused) {
+          playButton.textContent = 'Start narration audio';
+        } else if (playerState === YT.PlayerState.PLAYING) {
+          playButton.textContent = 'Pause story';
+        } else {
+          playButton.textContent = 'Play video with narration';
+        }
+      };
 
-          if (
-            Number.isFinite(audio.duration) &&
-            Math.abs(audio.currentTime - audioTime) > 0.25
-          ) {
-            audio.currentTime = audioTime;
-          }
-          audio.playbackRate = video.playbackRate * durationRatio;
-        };
+      const parseTimestamp = timestamp => {
+        const parts = timestamp.split(':').map(Number);
+        const seconds = parts.pop();
+        return parts.reduce((total, part) => total * 60 + part, seconds);
+      };
 
-        const showAudioError = error => {
-          if (error.name === 'AbortError') return;
+      const loadCaptions = async () => {
+        const response = await fetch('../assets/transcripts/kigali-to-the-world.vtt');
+        if (!response.ok) {
+          throw new Error(`Caption request failed with status ${response.status}.`);
+        }
 
-          console.error('Unable to play the video narration.', error);
-          audioStatus.textContent = 'The narration could not be played. The video will continue without audio.';
-          audioStatus.hidden = false;
-        };
+        const blocks = (await response.text()).replace(/\r/g, '').trim().split(/\n\s*\n/);
+        cues = blocks.slice(1).flatMap(block => {
+          const lines = block.split('\n');
+          const timingIndex = lines.findIndex(line => line.includes('-->'));
+          if (timingIndex < 0) return [];
 
-        const playAudio = () => {
-          syncAudio();
-          if (audio.paused) {
-            audio.play().catch(showAudioError);
-          }
-        };
+          const timestamps = lines[timingIndex].match(
+            /(\d{2,}:\d{2}:\d{2}\.\d{3})\s+-->\s+(\d{2,}:\d{2}:\d{2}\.\d{3})/
+          );
+          if (!timestamps) return [];
 
-        video.addEventListener('play', playAudio);
-        video.addEventListener('playing', playAudio);
-        video.addEventListener('loadedmetadata', syncAudio);
-        video.addEventListener('durationchange', syncAudio);
-        video.addEventListener('pause', () => audio.pause());
-        video.addEventListener('seeking', syncAudio);
-        video.addEventListener('timeupdate', syncAudio);
-        video.addEventListener('ratechange', syncAudio);
-        video.addEventListener('waiting', () => audio.pause());
-        audio.addEventListener('loadedmetadata', syncAudio);
-        narrationVolume.addEventListener('input', () => {
-          audio.volume = Number(narrationVolume.value) / 100;
+          return [{
+            start: parseTimestamp(timestamps[1]),
+            end: parseTimestamp(timestamps[2]),
+            text: lines.slice(timingIndex + 1).join('\n')
+          }];
         });
-        audio.addEventListener('canplay', () => {
+
+        if (cues.length === 0) {
+          throw new Error('The WebVTT file contains no readable caption cues.');
+        }
+      };
+
+      const updateCaptions = currentTime => {
+        const cue = cues.find(item => currentTime >= item.start && currentTime <= item.end);
+        captionText.textContent = cue ? cue.text : '';
+        captionOverlay.classList.toggle('is-hidden', !cue || captionsToggle.getAttribute('aria-pressed') !== 'true');
+      };
+
+      const syncNarration = () => {
+        if (!playerReady || audio.readyState < 1) return;
+
+        const videoDuration = player.getDuration();
+        const durationRatio =
+          Number.isFinite(videoDuration) &&
+          Number.isFinite(audio.duration) &&
+          videoDuration > 0
+            ? audio.duration / videoDuration
+            : 1;
+        const audioTime = player.getCurrentTime() * durationRatio;
+
+        if (Number.isFinite(audio.duration) && Math.abs(audio.currentTime - audioTime) > 0.3) {
+          audio.currentTime = audioTime;
+        }
+        audio.playbackRate = player.getPlaybackRate() * durationRatio;
+      };
+
+      const playNarration = () => {
+        syncNarration();
+        audio.play().then(() => {
           audioStatus.hidden = true;
+          setPlayButtonLabel();
+        }).catch(error => {
+          if (error.name === 'AbortError') return;
+          showStatus('The video is playing. Select “Start narration audio” to enable the narration.');
+          setPlayButtonLabel();
         });
-        audio.addEventListener('error', () => {
-          showAudioError(new Error('The narration audio file could not be loaded.'));
+      };
+
+      const handlePlayerStateChange = event => {
+        playerState = event.data;
+        if (playerState === YT.PlayerState.PLAYING) {
+          window.clearInterval(syncTimer);
+          playNarration();
+          syncTimer = window.setInterval(() => {
+            syncNarration();
+            updateCaptions(player.getCurrentTime());
+          }, 250);
+        } else {
+          window.clearInterval(syncTimer);
+          audio.pause();
+          if (playerState === YT.PlayerState.ENDED) {
+            audio.currentTime = 0;
+            updateCaptions(0);
+          }
+        }
+        setPlayButtonLabel();
+      };
+
+      window.onYouTubeIframeAPIReady = () => {
+        player = new YT.Player('story-video', {
+          videoId: YOUTUBE_VIDEO_ID,
+          playerVars: {
+            playsinline: 1,
+            rel: 0,
+            origin: window.location.origin
+          },
+          events: {
+            onReady: () => {
+              playerReady = true;
+              player.getIframe().title = 'Kigali to the World video player';
+              player.setVolume(20);
+              playButton.disabled = false;
+              setPlayButtonLabel();
+            },
+            onStateChange: handlePlayerStateChange,
+            onError: event => {
+              console.error('Unable to load the YouTube video.', event.data);
+              showStatus('The video could not be loaded. Use the YouTube link below to watch it.');
+            }
+          }
         });
-      }
+      };
+
+      const youtubeApi = document.createElement('script');
+      youtubeApi.src = 'https://www.youtube.com/iframe_api';
+      youtubeApi.addEventListener('error', () => {
+        showStatus('The embedded video player could not be loaded. Use the YouTube link below to watch it.');
+      });
+      document.head.append(youtubeApi);
+
+      playButton.addEventListener('click', () => {
+        if (!playerReady) return;
+
+        if (playerState === YT.PlayerState.PLAYING && audio.paused) {
+          playNarration();
+        } else if (playerState === YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+          audio.pause();
+        } else {
+          syncNarration();
+          player.playVideo();
+          playNarration();
+        }
+      });
+
+      captionsToggle.addEventListener('click', () => {
+        const showCaptions = captionsToggle.getAttribute('aria-pressed') !== 'true';
+        captionsToggle.setAttribute('aria-pressed', String(showCaptions));
+        captionsToggle.textContent = showCaptions ? 'Hide captions' : 'Show captions';
+        captionOverlay.classList.toggle('is-hidden', !showCaptions || !captionText.textContent);
+      });
+
+      narrationVolume.addEventListener('input', () => {
+        audio.volume = Number(narrationVolume.value) / 100;
+      });
+      audio.volume = Number(narrationVolume.value) / 100;
+      audio.addEventListener('error', () => {
+        console.error('Unable to load the video narration audio.');
+        showStatus('The narration audio could not be loaded. The video can still play.');
+      });
+
+      loadCaptions().catch(error => {
+        console.error('Unable to load the WebVTT captions.', error);
+        captionStatus.textContent = 'English captions could not be loaded. The transcript is available below.';
+        captionStatus.hidden = false;
+      });
 
       document.addEventListener('keydown', event => {
         if (event.key === 'Escape' && navLinks.classList.contains('is-open')) {
