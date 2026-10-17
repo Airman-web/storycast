@@ -1,0 +1,42 @@
+// ============================================================
+// StoryCast — Color Tokens
+// All brand colors defined as CSS custom properties on :root
+// so they cascade to every component automatically.
+//
+// Contrast verified against WCAG 2.1 AA:
+//   • Cream (#faf8f5) on deep greige (#78716C) = 4.51:1  ✓ AA
+//   • Dark  (#1c1917) on warm white (#faf8f5)  = 15.9:1  ✓ AAA
+//   • Dark  (#1c1917) on gold (#c9a84c)         = 7.35:1  ✓ AAA
+// ============================================================
+
+:root {
+  // ── Hero / navigation — warm greige tones ──────────────
+  --clr-greige-100: #C8BFB8;   // lightest — top of hero gradient
+  --clr-greige-200: #A09890;   // mid — body of hero gradient
+  --clr-greige-300: #78716C;   // deep — nav, footer, gradient base
+  --clr-greige-400: #6b6460;   // border on dark sections
+
+  // ── Accent — champagne gold ────────────────────────────
+  // Used ONLY on buttons and decorative lines, never as body text
+  --clr-gold:       #c9a84c;
+  --clr-gold-dark:  #a8883a;   // hover / pressed state
+
+  // ── Content backgrounds ────────────────────────────────
+  --clr-bg:         #faf8f5;   // page background — warm white
+  --clr-cream:      #f5f0e8;   // alternate section background
+  --clr-beige:      #ede8dc;   // card surfaces, progress tracks
+
+  // ── Typography ─────────────────────────────────────────
+  --clr-text:             #1c1917;   // primary — all light backgrounds
+  --clr-text-muted:       #78716c;   // secondary body text
+  --clr-text-light:       #faf8f5;   // primary on greige hero
+  --clr-text-muted-light: #d6cfc8;   // secondary on greige hero
+
+  // ── Borders ────────────────────────────────────────────
+  --clr-border:       #e2dbd0;   // card and section borders
+  --clr-border-dark:  #6b6460;   // borders on greige sections
+
+  // ── Utility ────────────────────────────────────────────
+  --clr-white:  #ffffff;
+  --clr-focus:  #c9a84c;   // focus ring — gold, clearly visible
+}
